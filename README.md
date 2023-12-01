@@ -39,7 +39,7 @@ Results
       <Key clicks for player 1, Key clicks for player 2>
   
 - Game Logic
-      <Update Board and Update Message>
+  <Update Board and Update Message>
 - Function to render it all together
       <Pull the  functions to update the board, update the message>
 - Function to edge
