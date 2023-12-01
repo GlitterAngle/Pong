@@ -32,13 +32,13 @@ Results
 ## Pseudocode 
 
 - Define the required variables used to track the state of the game
-      Not too sure what this would be yet
+      (Not too sure what this would be yet)
 - Store cached element references
-      Reset Buttone, Winner Message, Game Board, Game Pieces
+      (Reset Buttone, Winner Message, Game Board, Game Pieces)
 - Event Handlers
-      Key clicks for each player
+      (Key clicks for each player)
 - Game logic
-      Update Board and Update Message
+      (Update Board and Update Message)
 - Function to render it all together 
 - Function to keep the pieces on the board (not including the ball on the left and right)
 - Function to bounce the ball
