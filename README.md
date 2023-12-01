@@ -40,6 +40,7 @@ Results
 - Game Logic (Update Board and Update Message)
 - Function to render game (Call functions to update the board, update the message)
 - Function to edge (keep game elements within the board boundaries)
+- function to move the ball
 - Function to bounce the ball off paddles and walls (only top and bottom walls)
 - Function to determin a winner 
 - Function to update the board (Upon load the page will have a set position and not being until a key click)

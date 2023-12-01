@@ -1,19 +1,4 @@
 body{
-    background-color: antiquewhite;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.mainBoard{
-    display: grid;
-    grid-template-columns: repeat(3, 20vmin);
-    grid-template-rows: repeat(3, 20vmin);
-    background-color: black;
-}
-
-title{
-    margin-bottom: 30px;
+    text-align: center;
+    padding: 50px;
 }
