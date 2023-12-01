@@ -37,7 +37,7 @@ Results
       <Reset Buttone, Winner Message, Game Board, Paddle 1, Paddle 2, Ball>
 - Event Handlers
       <Key clicks for player 1, Key clicks for player 2>
-  Game logic
+- Game logic
       <Update Board and Update Message>
 - Function to render it all together
       <Pull the  functions to update the board, update the message>
