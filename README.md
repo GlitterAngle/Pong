@@ -33,7 +33,8 @@ Results
 
 - Define the required variables used to track the state of the game
       (Not too sure what this would be yet)
-- Store cached element references (Reset Buttone, Winner Message, Game Board, Paddle 1, Paddle 2, Ball)
+- Store cached element references 
+  `Reset Buttone, Winner Message, Game Board, Paddle 1, Paddle 2, Ball`
 - Event Handlers (Key clicks for player 1, Key clicks for player 2)
 - Game Logic (Update Board and Update Message)
 - Function to render it all together (Pull the  functions to update the board, update the message)
