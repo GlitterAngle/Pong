@@ -34,19 +34,19 @@ Results
 - Define the required variables used to track the state of the game
       (Not too sure what this would be yet)
 - Store cached element references
-      {Reset Buttone, Winner Message, Game Board, Paddle 1, Paddle 2, Ball}
+      <Reset Buttone, Winner Message, Game Board, Paddle 1, Paddle 2, Ball>
 - Event Handlers
-      {Key clicks for player 1, Key clicks for player 2}
+      <Key clicks for player 1, Key clicks for player 2>
   ####Game logic
-      {Update Board and Update Message}
+      <Update Board and Update Message>
 - Function to render it all together
-      {Pull the  functions to update the board, update the message}
+      <Pull the  functions to update the board, update the message>
 - Function to edge
-        {keep pieces on the board as to not fall off the top or bottom edge}
+        <keep pieces on the board as to not fall off the top or bottom edge>
 - Function to bounce the ball
 - Function to determin a winner 
 - Function to update the board
-      {Upon load the page will have a set position and not being until a key click}
+        <Upon load the page will have a set position and not being until a key click>
  
 
 
