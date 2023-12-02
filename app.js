@@ -1,47 +1,107 @@
 
 
 // cached
-let coanvas = document.getElementById('canvas')
+let canvas = document.getElementById('canvas')
 let context = canvas.getContext('2d')
-
-//event handlers
-window.addEventListener('keydown', e =>{
-    switch (e.key){
-        case 'ArrowUp':
-            inputDirection = {x: 0, y: -1} 
-            break
-        case 'ArrowDown':
-            inputDirection = {x: 0, y: 1} 
-            break
-        case 'ArrowUp':
-            inputDirection = {x: 0, y: -1} 
-            break
-        case 'ArrowDown':
-            inputDirection = {x: 0, y: 1}
-            break
-    }
-})
+const msg = document.getElementById('msg')
+const reset = document.querySelector('button')
 
 //window 
-const windowHeight = window.innerHeight
-const windowWidth = window.innerWidth
 
-canvas.height = windowHeight
-canvas.width = windowWidth
+canvas.width = 1400
+canvas.height = 1000
+
+canvas.style.width = (canvas.width / 2) + 'px'
+canvas.style.height = (canvas.height / 2) + 'px'
+
+
 canvas.style.background = 'black'
 
 //paddles and ball
-context.fillStyle = 'white'
-let paddleOne = context.fillRect(0, 0, 50, 200)
-let paddleTwo = context.fillRect(685,550,50,215)
 
-//might need to make a class out of this or function will come back
-context.beginPath()
-context.lineWidth = 5
-context.arc(200, 300, 10, 0 , Math.PI*2, false)
-context.strokeStyle = 'pink'
-context.stroke()
-context.closePath()
+class Paddle{
+    constructor(xpos,ypos,wpos,hpos, color, isPaddleOne){
+        this.xpos = isPaddleOne ? xpos/ 2 - 700 : xpos /2 + 650
+        this.ypos = isPaddleOne ? ypos/2 - 500 : ypos/2 + 300
+        this.wpos = wpos
+        this.hpos = hpos
+        this.color = color
+        this.inputDirection = {x:0, y:0}
+        
+    }
+    create(context) {
+        context.fillStyle = this.color
+        context.fillRect(this.xpos,this.ypos,this.wpos,this.hpos)
+    }
+    updateDirection(){
+        this.ypos += this.inputDirection.y
+    }
+}
+
+class Circle{
+    constructor(xpos, ypos, radius, color){
+        this.xpos = xpos
+        this.ypos = ypos
+        this.radius = radius
+        this.color = color
+    }
+    draw(context) {
+        context.beginPath()
+        context.lineWidth = 5
+        context.arc(this.xpos, this.ypos, this.radius, 0 , Math.PI*2, false)
+        context.fillStyle = this.color
+        context.fill()
+        context.stroke()
+        context.closePath()   
+    }
+}
+
+let pong = new Circle(200, 300, 30, 'white')
+let paddleOne = new Paddle(canvas.width, canvas.height, 50, 200,'white', true)
+let paddleTwo = new Paddle(this.canvas.width, this.canvas.height,50,200, 'white', false)
 
 
-//
+
+//event handlers
+let inputDirection = {x: 0, y:0}
+document.addEventListener('keydown', e =>{
+    switch (e.key){
+        case 'ArrowUp':
+            paddleOne.inputDirection = {x: 0, y: -1} 
+            break
+        case 'ArrowDown':
+            paddleOne.inputDirection = {x: 0, y: 1} 
+            break
+        case 'w':
+            paddleTwo.inputDirection = {x: 0, y: -1} 
+            break
+        case 's':
+            paddleTwo.inputDirection = {x: 0, y: 1}
+            break
+    }
+
+})
+
+reset.addEventListener('click', function(event)
+{
+
+})
+
+pong.draw(context)
+paddleOne.create(context)
+paddleTwo.create(context)
+
+function updateBoard(){
+    paddleOne.updateDirection()
+    paddleTwo.updateDirection()
+    console.log(paddleOne.updateDirection)
+}
+
+//Game Logic
+
+function render(){
+    updateBoard()
+    // updateMessgae()
+}
+
+render()
