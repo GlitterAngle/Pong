@@ -67,11 +67,29 @@ let currentOne = paddleOne.getCurrentY()
 console.log(currentOne)
 
 let currentTwo = paddleTwo.getCurrentY()
-console.log(currentTwo)
+
+function updateBoard() {
+    // Clear the entire canvas
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Redraw elements with updated positions
+    pong.draw(context);
+    paddleOne.create(context);
+    paddleTwo.create(context);
+}
 
 //event listeners
+window.addEventListener('keydown',(e) =>{
+    if(e.keyCode === 38){
+        if(currentTwo > 0 ){
+            currentTwo -= speed
+            paddleTwo.ypos = currentTwo 
 
-
+            updateBoard()
+        }
+    }
+    
+})
 
 
 
@@ -84,6 +102,8 @@ console.log(currentTwo)
 pong.draw(context)
 paddleOne.create(context)
 paddleTwo.create(context)
+
+updateBoard()
 // function updateBoard(){
 //     pong.draw(context)
 //     paddleOne.create(context)
