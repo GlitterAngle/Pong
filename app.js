@@ -3,7 +3,7 @@ let canvas = document.getElementById('canvas')
 let context = canvas.getContext('2d')
 const msg = document.getElementById('msg')
 const reset = document.querySelector('button')
-let speed = 10
+let speed = 20
 
 //window 
 
@@ -85,10 +85,17 @@ window.addEventListener('keydown',(e) =>{
             currentTwo -= speed
             paddleTwo.ypos = currentTwo 
 
-            updateBoard()
+            
         }
     }
-    
+    if(e.keyCode === 40){
+        if(currentTwo + paddleTwo.hpos < canvas.height){
+            currentTwo += speed
+            paddleTwo.ypos = currentTwo
+        }
+    }
+
+    updateBoard()
 })
 
 
@@ -99,22 +106,6 @@ window.addEventListener('keydown',(e) =>{
 // })
 
 //call what you need 
-pong.draw(context)
-paddleOne.create(context)
-paddleTwo.create(context)
+
 
 updateBoard()
-// function updateBoard(){
-//     pong.draw(context)
-//     paddleOne.create(context)
-//     paddleTwo.create(context)
-// }
-
-// //Game Logic
-
-// function render(){
-//     updateBoard()
-//     // updateMessgae()
-// }
-
-// render()
