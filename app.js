@@ -3,6 +3,7 @@ let canvas = document.getElementById('canvas')
 let context = canvas.getContext('2d')
 const msg = document.getElementById('msg')
 const reset = document.querySelector('button')
+let speed = 10
 
 //window 
 
@@ -16,12 +17,28 @@ canvas.style.height = (canvas.height / 2) + 'px'
 canvas.style.background = 'black'
 
 //paddles and ball
-context.fillStyle = 'pink'
-let paddleOne = context.fillRect(canvas.width/2 -700 ,canvas.
-height/2 - 500,50,200)
-context.fillStyle = 'blue'
-let paddleTwo = context.fillRect(canvas.width/2 + 650, canvas.height/2 + 300, 50, 200)
+// context.fillStyle = 'pink'
+// let paddleOne = context.fillRect(canvas.width/2 -700 ,canvas.
+// height/2 - 500,50,200)
+// context.fillStyle = 'blue'
+// let paddleTwo = context.fillRect(canvas.width/2 + 650, canvas.height/2 + 300, 50, 200)
 
+class Paddle{
+    constructor(xpos,ypos,wpos,hpos, color, isPaddleOne){
+        this.xpos = isPaddleOne ? xpos/ 2 - 700 : xpos /2 + 650
+        this.ypos = isPaddleOne ? ypos/2 - 500 : ypos/2 + 300
+        this.wpos = wpos
+        this.hpos = hpos
+        this.color = color
+    }
+    create(context) {
+        context.fillStyle = this.color
+        context.fillRect(this.xpos,this.ypos,this.wpos,this.hpos)
+    }
+   getCurrentY(){
+    return this.ypos
+   }
+}
 
 class Circle{
     constructor(xpos, ypos, radius, color){
@@ -41,18 +58,20 @@ class Circle{
     }
 }
 
-let pong = new Circle(200, 300, 30, 'white')
 
+let pong = new Circle(200, 300, 30, 'white')
+let paddleOne = new Paddle(canvas.width, canvas.height, 50, 200,'pink', true)
+let paddleTwo = new Paddle(canvas.width, canvas.height,50,200, 'blue', false)
+
+let currentOne = paddleOne.getCurrentY()
+console.log(currentOne)
+
+let currentTwo = paddleTwo.getCurrentY()
+console.log(currentTwo)
 
 //event listeners
 
 
-document.addEventListener('keydown', function moveUpOrDown(event){
-    if(event.keyCode === 38){
-        paddleTwo.ypos -= 20
-        console.log('Up arrow key pressed!');
-    }
-})
 
 
 
@@ -65,7 +84,6 @@ document.addEventListener('keydown', function moveUpOrDown(event){
 pong.draw(context)
 paddleOne.create(context)
 paddleTwo.create(context)
-
 // function updateBoard(){
 //     pong.draw(context)
 //     paddleOne.create(context)
