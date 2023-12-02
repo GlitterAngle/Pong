@@ -63,10 +63,6 @@ let pong = new Circle(200, 300, 30, 'white')
 let paddleOne = new Paddle(canvas.width, canvas.height, 50, 200,'pink', true)
 let paddleTwo = new Paddle(canvas.width, canvas.height,50,200, 'blue', false)
 
-let currentOne = paddleOne.getCurrentY()
-console.log(currentOne)
-
-let currentTwo = paddleTwo.getCurrentY()
 
 function updateBoard() {
     // Clear the entire canvas
@@ -80,6 +76,10 @@ function updateBoard() {
 
 //event listeners
 window.addEventListener('keydown',(e) =>{
+
+let currentOne = paddleOne.getCurrentY()
+let currentTwo = paddleTwo.getCurrentY()
+
     if(e.keyCode === 38){
         if(currentTwo > 0 ){
             currentTwo -= speed
@@ -92,6 +92,18 @@ window.addEventListener('keydown',(e) =>{
         if(currentTwo + paddleTwo.hpos < canvas.height){
             currentTwo += speed
             paddleTwo.ypos = currentTwo
+        }
+    }
+    if(e.keyCode === 87){
+        if(currentOne > 0){
+            currentOne -= speed
+            paddleOne.ypos = currentOne
+        }
+    }
+    if(e.keyCode === 83){
+        if(currentOne + paddleOne.hpos < canvas.height){
+            currentOne += speed
+            paddleOne.ypos = currentOne
         }
     }
 
