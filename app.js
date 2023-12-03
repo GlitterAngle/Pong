@@ -3,7 +3,7 @@ let canvas = document.getElementById('canvas')
 let context = canvas.getContext('2d')
 const msg = document.getElementById('msg')
 const reset = document.querySelector('button')
-let speed = 20
+
 
 //window 
 
@@ -47,8 +47,8 @@ class Circle{
         this.radius = radius
         this.color = color
         this.speed = speed
-        this.dx = 0 + this.speed
-        this.dy = 0 + this.speed
+        this.dx = 1 + this.speed
+        this.dy = 1 + this.speed
     }
     draw(context) {
         context.beginPath()
@@ -60,12 +60,22 @@ class Circle{
         context.closePath()   
     }
     bounce(){
-        //add movement to ball
+        //make it
+        //this will keep it from going off the top 
+        if((this.ypos - this.radius)< canvas.width){
+            this.dy = -this.dy
+        }
+        if((this.ypos - this.radius)<0){
+            this.dy = -this.dy
+        }
+        //this creates movement 
+        this.xpos += this.dx
+        this.ypos += this.dy
         }
 }
 
 
-let pong = new Circle(200, 300, 30, 'white',1)
+let pong = new Circle(canvas.width/2, canvas.height/2, 20, 'white',12)
 let paddleOne = new Paddle(canvas.width, canvas.height, 50, 200,'pink', true)
 let paddleTwo = new Paddle(canvas.width, canvas.height,50,200, 'blue', false)
 
@@ -114,10 +124,12 @@ function render() {
 }
 
 function updateBoard(){
+    requestAnimationFrame(updateBoard)
     context.clearRect(0, 0, canvas.width, canvas.height);
     pong.draw(context);
     paddleOne.create(context);
     paddleTwo.create(context);
+    pong.bounce()
 }
 
 function init(){
