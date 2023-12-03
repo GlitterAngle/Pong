@@ -3,7 +3,7 @@ let canvas = document.getElementById('canvas')
 let context = canvas.getContext('2d')
 const msg = document.getElementById('msg')
 const reset = document.querySelector('button')
-let speed = 20
+let speed = 50
 
 //window 
 
@@ -36,16 +36,17 @@ class Paddle{
 }
 
 class Circle{
-    constructor(xpos, ypos, radius, color, speed){
+    constructor(xpos, ypos, radius, color, velocity){
         this.xpos = xpos
         this.ypos = ypos
         this.radius = radius
         this.color = color
-        this.speed = speed
+        this.velocity = velocity
         this.dx = 1 
         this.dy = 1 
     }
     randomStart(){
+        
         if(Math.floor(Math.random()* 2) == 1){
             this.dx = 1
         } else {
@@ -70,7 +71,7 @@ class Circle{
     }
     bounce(){
         this.draw(context) 
-        
+    
         if (this.ypos <= 0 + this.radius){
             this.dy *= -1
         }
@@ -90,8 +91,8 @@ class Circle{
         } 
 
 
-        this.xpos += (this.speed*this.dx)
-        this.ypos += (this.speed*this.dy)
+        this.xpos += this.dx * this.velocity
+        this.ypos += this.dy * this.velocity
     }
    
 }
@@ -101,47 +102,71 @@ pong.randomStart()
 let paddleOne = new Paddle(canvas.width, canvas.height, 50, 200,'pink', true)
 let paddleTwo = new Paddle(canvas.width, canvas.height,50,200, 'blue', false)
 
-//event listeners
-window.addEventListener('keydown',(e) =>{
 
-let currentOne = paddleOne.getCurrentY()
-let currentTwo = paddleTwo.getCurrentY()
+   //event listeners
+// window.addEventListener('keydown',(e) =>{
 
-    if(e.keyCode === 38){
-        if(currentTwo > 0 ){
-            currentTwo -= speed
-            paddleTwo.ypos = currentTwo
-            pong.speed = 10 
+//     let currentOne = paddleOne.getCurrentY()
+//     let currentTwo = paddleTwo.getCurrentY()
+    
+//         if(e.keyCode === 38){
+//             if(currentTwo > 0 ){
+//                 currentTwo -= speed
+//                 paddleTwo.ypos = currentTwo
+//             }
+//         }
+//         if(e.keyCode === 40){
+//             if(currentTwo + paddleTwo.hpos < canvas.height){
+//                 currentTwo += speed
+//                 paddleTwo.ypos = currentTwo
+//             }
+//         }
+//         if(e.keyCode === 87){
+//             if(currentOne > 0){
+//                 currentOne -= speed
+//                 paddleOne.ypos = currentOne
+//             }
+//         }
+//         if(e.keyCode === 83){
+//             if(currentOne + paddleOne.hpos < canvas.height){
+//                 currentOne += speed
+//                 paddleOne.ypos = currentOne
+//             }
+//         }
+    
+//         render()
+//     })
 
-            
-        }
-    }
-    if(e.keyCode === 40){
-        if(currentTwo + paddleTwo.hpos < canvas.height){
-            currentTwo += speed
-            paddleTwo.ypos = currentTwo
-            pong.speed = 10
-        }
-    }
-    if(e.keyCode === 87){
-        if(currentOne > 0){
-            currentOne -= speed
-            paddleOne.ypos = currentOne
-            pong.speed = 10
-        }
-    }
-    if(e.keyCode === 83){
-        if(currentOne + paddleOne.hpos < canvas.height){
-            currentOne += speed
-            paddleOne.ypos = currentOne
-            pong.speed = 10
-        }
+
+window.addEventListener('keydown', (e) => {
+    let currentOne = paddleOne.getCurrentY();
+    let currentTwo = paddleTwo.getCurrentY();
+
+    switch (e.keyCode) {
+        case 38:  // Up arrow key
+            if (currentTwo > 0) {
+                paddleTwo.ypos -= speed;
+            }
+            break
+        case 40:  // Down arrow key
+            if (currentTwo + paddleTwo.hpos < canvas.height) {
+                paddleTwo.ypos += speed;
+            }
+            break
+        case 87:  // W key
+            if (currentOne > 0) {
+                paddleOne.ypos -= speed;
+            }
+            break
+        case 83:  // S key
+            if (currentOne + paddleOne.hpos < canvas.height) {
+                paddleOne.ypos += speed;
+            }
+            break
     }
 
-    render()
+    
 })
-
-
 
 reset.addEventListener('click', init)
 
