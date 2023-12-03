@@ -41,11 +41,14 @@ class Paddle{
 }
 
 class Circle{
-    constructor(xpos, ypos, radius, color){
+    constructor(xpos, ypos, radius, color, speed){
         this.xpos = xpos
         this.ypos = ypos
         this.radius = radius
         this.color = color
+        this.speed = speed
+        this.dx = 1 + this.speed
+        this.dy = 1 + this.speed
     }
     draw(context) {
         context.beginPath()
@@ -57,15 +60,24 @@ class Circle{
         context.closePath()   
     }
     bounce(){
+        this.draw(context)
 
+        if ((this.ypos + this.radius) > canvas.height){//bottom
+            this.dy = -this.dy
+           }
+           if((this.ypos - this.radius)< 0){ //top
+            this.dy = -this.dy
+           }
+
+        this.xpos += this.dx
+        this.ypos += this.dy
     }
+
 }
 
-
-let pong = new Circle(canvas.width/2, canvas.height/2, 20, 'white')
+let pong = new Circle(canvas.width/2, canvas.height/2, 20, 'white', 5)
 let paddleOne = new Paddle(canvas.width, canvas.height, 50, 200,'pink', true)
 let paddleTwo = new Paddle(canvas.width, canvas.height,50,200, 'blue', false)
-
 
 //event listeners
 window.addEventListener('keydown',(e) =>{
@@ -109,22 +121,21 @@ reset.addEventListener('click', init)
 
 //call what you need 
 function render() {
-    // Clear the entire canvas
-    // context.clearRect(0, 0, canvas.width, canvas.height);
     updateBoard()
-    // Redraw elements with updated positions
-    // pong.draw(context);
-    // paddleOne.create(context);
-    // paddleTwo.create(context);
-    // updateMessage()
+    
 }
 
 function updateBoard(){
     context.clearRect(0, 0, canvas.width, canvas.height);
-    pong.draw(context);
     paddleOne.create(context);
     paddleTwo.create(context);
+    requestAnimationFrame(updateBoard)
+    pong.bounce()
+    pong.draw(context)
+
 }
+
+
 
 function init(){
     render()
