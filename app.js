@@ -41,11 +41,14 @@ class Paddle{
 }
 
 class Circle{
-    constructor(xpos, ypos, radius, color){
+    constructor(xpos, ypos, radius, color, speed){
         this.xpos = xpos
         this.ypos = ypos
         this.radius = radius
         this.color = color
+        this.speed = speed
+        this.dx = 0 + this.speed
+        this.dy = 0 + this.speed
     }
     draw(context) {
         context.beginPath()
@@ -56,10 +59,13 @@ class Circle{
         context.stroke()
         context.closePath()   
     }
+    bounce(){
+        //add movement to ball
+        }
 }
 
 
-let pong = new Circle(200, 300, 30, 'white')
+let pong = new Circle(200, 300, 30, 'white',1)
 let paddleOne = new Paddle(canvas.width, canvas.height, 50, 200,'pink', true)
 let paddleTwo = new Paddle(canvas.width, canvas.height,50,200, 'blue', false)
 
@@ -74,8 +80,6 @@ let currentTwo = paddleTwo.getCurrentY()
         if(currentTwo > 0 ){
             currentTwo -= speed
             paddleTwo.ypos = currentTwo 
-
-            
         }
     }
     if(e.keyCode === 40){
@@ -99,7 +103,6 @@ let currentTwo = paddleTwo.getCurrentY()
 
     render()
 })
-
 
 
 reset.addEventListener('click', init)
