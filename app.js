@@ -3,7 +3,7 @@ let canvas = document.getElementById('canvas')
 let context = canvas.getContext('2d')
 const msg = document.getElementById('msg')
 const reset = document.querySelector('button')
-
+let speed = 20
 
 //window 
 
@@ -41,14 +41,11 @@ class Paddle{
 }
 
 class Circle{
-    constructor(xpos, ypos, radius, color, speed){
+    constructor(xpos, ypos, radius, color){
         this.xpos = xpos
         this.ypos = ypos
         this.radius = radius
         this.color = color
-        this.speed = speed
-        this.dx = 1 + this.speed
-        this.dy = 1 + this.speed
     }
     draw(context) {
         context.beginPath()
@@ -60,22 +57,12 @@ class Circle{
         context.closePath()   
     }
     bounce(){
-        //make it
-        //this will keep it from going off the top 
-        if((this.ypos - this.radius)< canvas.width){
-            this.dy = -this.dy
-        }
-        if((this.ypos - this.radius)<0){
-            this.dy = -this.dy
-        }
-        //this creates movement 
-        this.xpos += this.dx
-        this.ypos += this.dy
-        }
+
+    }
 }
 
 
-let pong = new Circle(canvas.width/2, canvas.height/2, 20, 'white',12)
+let pong = new Circle(canvas.width/2, canvas.height/2, 20, 'white')
 let paddleOne = new Paddle(canvas.width, canvas.height, 50, 200,'pink', true)
 let paddleTwo = new Paddle(canvas.width, canvas.height,50,200, 'blue', false)
 
@@ -90,6 +77,8 @@ let currentTwo = paddleTwo.getCurrentY()
         if(currentTwo > 0 ){
             currentTwo -= speed
             paddleTwo.ypos = currentTwo 
+
+            
         }
     }
     if(e.keyCode === 40){
@@ -115,21 +104,26 @@ let currentTwo = paddleTwo.getCurrentY()
 })
 
 
+
 reset.addEventListener('click', init)
 
 //call what you need 
 function render() {
+    // Clear the entire canvas
+    // context.clearRect(0, 0, canvas.width, canvas.height);
     updateBoard()
-   
+    // Redraw elements with updated positions
+    // pong.draw(context);
+    // paddleOne.create(context);
+    // paddleTwo.create(context);
+    // updateMessage()
 }
 
 function updateBoard(){
-    requestAnimationFrame(updateBoard)
     context.clearRect(0, 0, canvas.width, canvas.height);
     pong.draw(context);
     paddleOne.create(context);
     paddleTwo.create(context);
-    pong.bounce()
 }
 
 function init(){
