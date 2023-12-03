@@ -64,16 +64,6 @@ let paddleOne = new Paddle(canvas.width, canvas.height, 50, 200,'pink', true)
 let paddleTwo = new Paddle(canvas.width, canvas.height,50,200, 'blue', false)
 
 
-function updateBoard() {
-    // Clear the entire canvas
-    context.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Redraw elements with updated positions
-    pong.draw(context);
-    paddleOne.create(context);
-    paddleTwo.create(context);
-}
-
 //event listeners
 window.addEventListener('keydown',(e) =>{
 
@@ -107,17 +97,28 @@ let currentTwo = paddleTwo.getCurrentY()
         }
     }
 
-    updateBoard()
+    render()
 })
 
 
 
-// reset.addEventListener('click', function(event)
-// {
-
-// })
+reset.addEventListener('click', init)
 
 //call what you need 
+function render() {
+    updateBoard()
+   
+}
 
+function updateBoard(){
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    pong.draw(context);
+    paddleOne.create(context);
+    paddleTwo.create(context);
+}
 
-updateBoard()
+function init(){
+    render()
+}
+
+init()
