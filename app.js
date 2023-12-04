@@ -58,7 +58,40 @@ class Circle{
         this.dx = 1 
         this.dy = 1 
     }
-    randomStart(){
+    draw(context) {
+        context.beginPath()
+        context.lineWidth = 5
+        context.arc(this.xpos, this.ypos, this.radius, 0 , Math.PI*2, false)
+        context.fillStyle = this.color
+        context.fill()
+        context.stroke()
+        context.closePath()
+    }
+    bounce(){ // creates movement of the ball 
+        this.draw(context) 
+    
+        if (this.ypos <= 0 + this.radius || this.ypos >= canvas.height - this.radius){
+            this.dy *= -1
+        }
+        //bounce off paddle
+        if(this.xpos <= (paddleOne.xpos + paddleOne.wpos +this.radius)){
+            if(this.ypos > paddleOne.ypos && this.ypos < paddleOne.ypos + paddleOne.hpos){
+                this.dx *= -1
+            }
+        } 
+        if(this.xpos >= (paddleTwo.xpos - this.radius)){
+            if(this.ypos > paddleTwo.ypos && this.ypos < paddleTwo.ypos + paddleTwo.hpos){
+                this.dx *= -1
+            }
+        } 
+       
+        
+
+
+        this.xpos += this.dx * this.velocity
+        this.ypos += this.dy * this.velocity
+    }
+    randomStart(){ //makes the ball go in a random direction 
         
         if(Math.floor(Math.random()* 2) == 1){
             this.dx = 1
@@ -73,52 +106,15 @@ class Circle{
         this.xpos = canvas.width/2
         this.ypos = canvas.height/2
     }
-    draw(context) {
-        context.beginPath()
-        context.lineWidth = 5
-        context.arc(this.xpos, this.ypos, this.radius, 0 , Math.PI*2, false)
-        context.fillStyle = this.color
-        context.fill()
-        context.stroke()
-        context.closePath()
-    }
-    bounce(){
-        this.draw(context) 
-    
-        if (this.ypos <= 0 + this.radius || this.ypos >= canvas.height - this.radius){
-            this.dy *= -1
+    checkOutOfBounds(){
+        if(this.xpos < 0 || this.xpos > canvas.width){
+            this.randomStart()
         }
-        //bounce off paddle
-        if(this.xpos <= (paddleOne.xpos + paddleOne.wpos +this.radius)){
-            if(this.ypos > paddleOne.ypos && this.ypos < paddleOne.ypos + paddleOne.hpos){
-                this.dx *= -1
-            }
-            // if(this.ypos <= canvas.width){
-            //     setTimeout(() => {this.randomStart()}, 1000)
-            // }
-        } 
-        if(this.xpos >= (paddleTwo.xpos - this.radius)){
-            if(this.ypos > paddleTwo.ypos && this.ypos < paddleTwo.ypos + paddleTwo.hpos){
-                this.dx *= -1
-            }
-            // if(this.xpos >= canvas.width){
-            //    setTimeout(() => {this.randomStart()}, 1000)
-            // }
-            
-        
-        } 
-       
-        
-
-
-        this.xpos += this.dx * this.velocity
-        this.ypos += this.dy * this.velocity
     }
-   
 }
 
 let pong = new Circle(canvas.width/2, canvas.height/2, 20, 'white', 5)
-pong.randomStart()
+
 let paddleOne = new Paddle(canvas.width, canvas.height, 50, 200,'pink', 30, true)
 let paddleTwo = new Paddle(canvas.width, canvas.height,50,200, 'blue', 30, false)
 
@@ -160,9 +156,22 @@ window.addEventListener('keydown', (e) => {
 reset.addEventListener('click', init)
 
 //functions
+
+function updateScore(text){
+    // let arr = text.split('')
+    let sum = 0
+    if(pong.xpos <= 0){
+        setTimeout(() => {pong.randomStart()}, 1000)
+        for (let i = 1; i <= 5; i++){
+        sum += parseInt(sum.shift) || 0
+    }
+    scoreOne.num = sum
+    }
+    }
+    
 function render() {
     updateBoard()
-    
+    pong.randomStart()
 }
 
 function updateBoard(){
@@ -173,10 +182,10 @@ function updateBoard(){
     scoreTwo.write()
     requestAnimationFrame(updateBoard)
     pong.bounce()
-    pong.collision()
+    pong.checkOutOfBounds()
     pong.draw(context)
+    
 }
-
 
 
 function init(){
