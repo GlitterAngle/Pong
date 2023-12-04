@@ -118,8 +118,8 @@ let pong = new Circle(canvas.width/2, canvas.height/2, 20, 'white', 5)
 let paddleOne = new Paddle(canvas.width, canvas.height, 50, 200,'pink', 30, true)
 let paddleTwo = new Paddle(canvas.width, canvas.height,50,200, 'blue', 30, false)
 
-let scoreOne = new Score( 0 , canvas.width - 200,canvas.height - 850)
-let scoreTwo = new Score( 0, canvas.width - 1200, canvas.height - 850)
+let scoreTwo = new Score( 0 , canvas.width - 200,canvas.height - 850)
+let scoreOne = new Score( 0, canvas.width - 1200, canvas.height - 850)
 //event listeners
 
 
@@ -153,19 +153,24 @@ window.addEventListener('keydown', (e) => {
     
 })
 
-reset.addEventListener('click', init)
+// reset.addEventListener('click', init) come back to this
 
 //functions
 
-function updateScore(value){
-    let sum = 0
-    if (pong.xpos > canvas.width){
-        for(let i = 0; i <= 5; i++){
-            sum += 1
-        }
+function updateScoreOne(value){
+    let sum = value
+    if (scoreOne && pong.xpos > canvas.width){
+        sum++
+        return scoreOne.num = sum
     }
-    return scoreOne.num = sum
+}
+function updateScoreTwo(value){
+    let sum =value
+    if(scoreTwo && pong.xpos < 0){
+        sum++
+        return scoreTwo.num = sum
     }
+}
 
 function render() {
     updateBoard()
@@ -180,6 +185,8 @@ function updateBoard(){
     scoreTwo.write()
     requestAnimationFrame(updateBoard)
     pong.bounce()
+    updateScoreOne(scoreOne.num)
+    updateScoreTwo(scoreTwo.num)
     pong.checkOutOfBounds()
     pong.draw(context)
     
