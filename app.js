@@ -113,10 +113,10 @@ class Circle{
     }
 }
 
-let pong = new Circle(canvas.width/2, canvas.height/2, 20, 'white', 5)
+let pong = new Circle(canvas.width/2, canvas.height/2, 20, 'white', 2)
 
-let paddleOne = new Paddle(canvas.width, canvas.height, 50, 200,'pink', 30, true)
-let paddleTwo = new Paddle(canvas.width, canvas.height,50,200, 'blue', 30, false)
+let paddleOne = new Paddle(canvas.width, canvas.height, 60, 200,'pink', 30, true)
+let paddleTwo = new Paddle(canvas.width, canvas.height,60,200, 'blue', 30, false)
 
 let scoreTwo = new Score( 0 , canvas.width - 200,canvas.height - 850)
 let scoreOne = new Score( 0, canvas.width - 1200, canvas.height - 850)
@@ -153,7 +153,7 @@ window.addEventListener('keydown', (e) => {
     
 })
 
-// reset.addEventListener('click', init) come back to this
+reset.addEventListener('click', render())
 
 //functions
 
@@ -172,9 +172,21 @@ function updateScoreTwo(value){
     }
 }
 
+function checkForWinner(){
+    if(scoreOne >= 5){
+        context.fillStyle= 'red'
+        context.font = '50px Arial'
+        context.fillText ('player one wins',canvas.width/2, canvas.width/2)
+    }
+    if(scoreTwo >= 5){
+        context.fillStyle= 'red'
+        context.font = '50px Arial'
+        context.fillText ('player two wins', canvas.width/2, canvas.height/2)
+    }
+}
+
 function render() {
     updateBoard()
-    pong.randomStart()
 }
 
 function updateBoard(){
@@ -187,14 +199,12 @@ function updateBoard(){
     pong.bounce()
     updateScoreOne(scoreOne.num)
     updateScoreTwo(scoreTwo.num)
+    checkForWinner()
     pong.checkOutOfBounds()
     pong.draw(context)
+    
     
 }
 
 
-function init(){
-    render()
-}
-
-init()
+render()
