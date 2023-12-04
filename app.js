@@ -118,8 +118,8 @@ let pong = new Circle(canvas.width/2, canvas.height/2, 20, 'white', 2)
 let paddleOne = new Paddle(canvas.width, canvas.height, 60, 200,'whie', 30, true)
 let paddleTwo = new Paddle(canvas.width, canvas.height,60,200, 'white', 30, false)
 
-let scoreTwo = new Score( 4 , canvas.width - 200,canvas.height - 850)
-let scoreOne = new Score( 4, canvas.width - 1200, canvas.height - 850)
+let scoreTwo = new Score( 0 , canvas.width - 200,canvas.height - 850)
+let scoreOne = new Score( 0, canvas.width - 1200, canvas.height - 850)
 //event listeners
 
 
