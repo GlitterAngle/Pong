@@ -118,8 +118,8 @@ let pong = new Circle(canvas.width/2, canvas.height/2, 20, 'white', 2)
 let paddleOne = new Paddle(canvas.width, canvas.height, 60, 200,'pink', 30, true)
 let paddleTwo = new Paddle(canvas.width, canvas.height,60,200, 'blue', 30, false)
 
-let scoreTwo = new Score( 0 , canvas.width - 200,canvas.height - 850)
-let scoreOne = new Score( 0, canvas.width - 1200, canvas.height - 850)
+let scoreTwo = new Score( 4 , canvas.width - 200,canvas.height - 850)
+let scoreOne = new Score( 4, canvas.width - 1200, canvas.height - 850)
 //event listeners
 
 
@@ -171,19 +171,28 @@ function updateScoreTwo(value){
         return scoreTwo.num = sum
     }
 }
-
-function checkForWinner(){
-    if(scoreOne >= 5){
-        context.fillStyle= 'red'
-        context.font = '50px Arial'
-        context.fillText ('player one wins',canvas.width/2, canvas.width/2)
-    }
-    if(scoreTwo >= 5){
-        context.fillStyle= 'red'
-        context.font = '50px Arial'
-        context.fillText ('player two wins', canvas.width/2, canvas.height/2)
-    }
+function stopGame(){
+    pong.velocity= 0
+    paddleOne.speed = 0
+    paddleTwo.speed = 0
 }
+
+function checkForWinner(scoreOne,scoreTwo){
+    if(scoreOne.num === 5){
+        context.fillStyle= 'red'
+        context.font = '100px Arial'
+        context.fillText ('Player One Wins!',canvas.width/2 - 350 , canvas.height/2 - 100)
+        stopGame()
+    }
+    if(scoreTwo.num === 5){
+        context.fillStyle= 'red'
+        context.font = '100px Arial'
+        context.fillText ('Player Two Wins!', canvas.width/2 - 350, canvas.height/2 - 100)
+        stopGame()
+    }
+    
+}
+
 
 function render() {
     updateBoard()
@@ -197,9 +206,9 @@ function updateBoard(){
     scoreTwo.write()
     requestAnimationFrame(updateBoard)
     pong.bounce()
+    checkForWinner(scoreOne,scoreTwo)
     updateScoreOne(scoreOne.num)
     updateScoreTwo(scoreTwo.num)
-    checkForWinner()
     pong.checkOutOfBounds()
     pong.draw(context)
     
