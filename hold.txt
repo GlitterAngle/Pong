@@ -3,7 +3,6 @@ let canvas = document.getElementById('canvas')
 let context = canvas.getContext('2d')
 const msg = document.getElementById('msg')
 const reset = document.querySelector('button')
-let speed = 50
 
 //window 
 
@@ -17,14 +16,15 @@ canvas.style.height = (canvas.height / 2) + 'px'
 canvas.style.background = 'black'
 
 
-
+//pieces 
 class Paddle{
-    constructor(xpos,ypos,wpos,hpos, color, isPaddleOne){
+    constructor(xpos,ypos,wpos,hpos, color, speed, isPaddleOne){
         this.xpos = isPaddleOne ? xpos/ 2 - 700 : xpos /2 + 650
-        this.ypos = isPaddleOne ? ypos/2 - 500 : ypos/2 + 300
+        this.ypos = isPaddleOne ? ypos/2  : ypos/2
         this.wpos = wpos
         this.hpos = hpos
         this.color = color
+        this.speed = speed
     }
     create(context) {
         context.fillStyle = this.color
@@ -80,15 +80,22 @@ class Circle{
             if(this.ypos > paddleOne.ypos && this.ypos < paddleOne.ypos + paddleOne.hpos){
                 this.dx *= -1
             }
+            if(this.ypos <= canvas.width){
+                setTimeout(() => {this.randomStart()}, 1000)
+            }
         } 
         if(this.xpos >= (paddleTwo.xpos - this.radius)){
             if(this.ypos > paddleTwo.ypos && this.ypos < paddleTwo.ypos + paddleTwo.hpos){
                 this.dx *= -1
             }
-            else {
-
+            if(this.xpos >= canvas.width){
+               setTimeout(() => {this.randomStart()}, 1000)
             }
+            
+        
         } 
+       
+        
 
 
         this.xpos += this.dx * this.velocity
@@ -99,36 +106,36 @@ class Circle{
 
 let pong = new Circle(canvas.width/2, canvas.height/2, 20, 'white', 10)
 pong.randomStart()
-let paddleOne = new Paddle(canvas.width, canvas.height, 50, 200,'pink', true)
-let paddleTwo = new Paddle(canvas.width, canvas.height,50,200, 'blue', false)
+let paddleOne = new Paddle(canvas.width, canvas.height, 50, 200,'pink', 30, true)
+let paddleTwo = new Paddle(canvas.width, canvas.height,50,200, 'blue', 30, false)
 
 
-   //event listeners
+//event listeners
 
 
 window.addEventListener('keydown', (e) => {
-    let currentOne = paddleOne.getCurrentY();
-    let currentTwo = paddleTwo.getCurrentY();
+    let currentOne = paddleOne.getCurrentY()
+    let currentTwo = paddleTwo.getCurrentY()
 
     switch (e.keyCode) {
         case 38:  
             if (currentTwo > 0) {
-                paddleTwo.ypos -= speed;
+                paddleTwo.ypos -= paddleTwo.speed;
             }
             break
         case 40:  
             if (currentTwo + paddleTwo.hpos < canvas.height) {
-                paddleTwo.ypos += speed;
+                paddleTwo.ypos += paddleTwo.speed;
             }
             break
         case 87:  
             if (currentOne > 0) {
-                paddleOne.ypos -= speed;
+                paddleOne.ypos -= paddleOne.speed;
             }
             break
         case 83:  
             if (currentOne + paddleOne.hpos < canvas.height) {
-                paddleOne.ypos += speed;
+                paddleOne.ypos += paddleOne.speed;
             }
             break
     }
@@ -138,7 +145,7 @@ window.addEventListener('keydown', (e) => {
 
 reset.addEventListener('click', init)
 
-//call what you need 
+//functions
 function render() {
     updateBoard()
     
@@ -161,3 +168,5 @@ function init(){
 }
 
 init()
+
+

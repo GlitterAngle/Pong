@@ -8,19 +8,15 @@ const reset = document.querySelector('button')
 
 canvas.width = 1400
 canvas.height = 1000
-
 canvas.style.width = (canvas.width / 2) + 'px'
 canvas.style.height = (canvas.height / 2) + 'px'
-
-
 canvas.style.background = 'black'
-
-
 //pieces 
+
 class Paddle{
     constructor(xpos,ypos,wpos,hpos, color, speed, isPaddleOne){
         this.xpos = isPaddleOne ? xpos/ 2 - 700 : xpos /2 + 650
-        this.ypos = isPaddleOne ? ypos/2 - 500 : ypos/2 + 300
+        this.ypos = isPaddleOne ? ypos/2 - 100  : ypos/2 - 100
         this.wpos = wpos
         this.hpos = hpos
         this.color = color
@@ -80,24 +76,7 @@ class Circle{
             if(this.ypos > paddleOne.ypos && this.ypos < paddleOne.ypos + paddleOne.hpos){
                 this.dx *= -1
             }
-            if(this.ypos <= canvas.width){
-                setTimeout(() => {this.randomStart()}, 1000)
-            }
         } 
-        if(this.xpos >= (paddleTwo.xpos - this.radius)){
-            if(this.ypos > paddleTwo.ypos && this.ypos < paddleTwo.ypos + paddleTwo.hpos){
-                this.dx *= -1
-            }
-            if(this.xpos >= canvas.width){
-               setTimeout(() => {this.randomStart()}, 1000)
-            }
-            
-        
-        } 
-       
-        
-
-
         this.xpos += this.dx * this.velocity
         this.ypos += this.dy * this.velocity
     }
@@ -129,11 +108,13 @@ window.addEventListener('keydown', (e) => {
             }
             break
         case 87:  
+        e.preventDefault()
             if (currentOne > 0) {
                 paddleOne.ypos -= paddleOne.speed;
             }
             break
         case 83:  
+        e.preventDefault()
             if (currentOne + paddleOne.hpos < canvas.height) {
                 paddleOne.ypos += paddleOne.speed;
             }
@@ -146,8 +127,15 @@ window.addEventListener('keydown', (e) => {
 reset.addEventListener('click', init)
 
 //functions
+
+function score(){
+
+}
+
+
 function render() {
     updateBoard()
+   
     
 }
 
@@ -159,12 +147,25 @@ function updateBoard(){
     pong.bounce()
     pong.collision()
     pong.draw(context)
+    
 }
 
+function checkForWinner(){
+    if(playerTwoScore > winningScore && aiScore){
+        return "you won"
+    } else {
+        if(aiScore > winningScore && playerTwoScore){
+            return 'you lost'
+        }
+    }
 
+}
 
 function init(){
     render()
+    
 }
 
 init()
+
+
