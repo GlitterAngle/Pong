@@ -17,7 +17,18 @@ canvas.style.background = 'black'
 
 
 //pieces 
-
+class Score{
+    constructor(num, xpos, ypos){
+        this.num = num
+        this.xpos = xpos
+        this.ypos = ypos
+    }
+    write(){
+        context.fillStyle= 'red'
+        context.font = '50px Arial'
+        context.fillText(this.num, this.xpos, this.ypos)
+    }
+}
 
 class Paddle{
     constructor(xpos,ypos,wpos,hpos, color, speed, isPaddleOne){
@@ -111,7 +122,8 @@ pong.randomStart()
 let paddleOne = new Paddle(canvas.width, canvas.height, 50, 200,'pink', 30, true)
 let paddleTwo = new Paddle(canvas.width, canvas.height,50,200, 'blue', 30, false)
 
-
+let scoreOne = new Score( 0 , canvas.width - 200,canvas.height - 850)
+let scoreTwo = new Score( 0, canvas.width - 1200, canvas.height - 850)
 //event listeners
 
 
@@ -157,6 +169,8 @@ function updateBoard(){
     context.clearRect(0, 0, canvas.width, canvas.height);
     paddleOne.create(context);
     paddleTwo.create(context);
+    scoreOne.write()
+    scoreTwo.write()
     requestAnimationFrame(updateBoard)
     pong.bounce()
     pong.collision()
