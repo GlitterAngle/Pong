@@ -157,18 +157,16 @@ reset.addEventListener('click', init)
 
 //functions
 
-function updateScore(text){
-    // let arr = text.split('')
+function updateScore(value){
     let sum = 0
-    if(pong.xpos <= 0){
-        setTimeout(() => {pong.randomStart()}, 1000)
-        for (let i = 1; i <= 5; i++){
-        sum += parseInt(sum.shift) || 0
+    if (pong.xpos > canvas.width){
+        for(let i = 0; i <= 5; i++){
+            sum += 1
+        }
     }
-    scoreOne.num = sum
+    return scoreOne.num = sum
     }
-    }
-    
+
 function render() {
     updateBoard()
     pong.randomStart()
