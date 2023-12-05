@@ -154,7 +154,7 @@ window.addEventListener('keydown', (e) => {
     
 })
 
-// reset.addEventListener('click', resetGame)
+reset.addEventListener('click', resetGame)
 
 function updateScoreOne(value){
     let sum = value
