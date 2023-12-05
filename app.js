@@ -76,12 +76,12 @@ class Circle{
         }
         //bounce off paddle
         if(this.xpos <= (paddleOne.xpos + paddleOne.wpos +this.radius)){
-            if(this.ypos > paddleOne.ypos && this.ypos < paddleOne.ypos + paddleOne.hpos){
+            if(this.ypos > paddleOne.ypos - this.radius && this.ypos < paddleOne.ypos + paddleOne.hpos + this.radius){
                 this.dx *= -1
             }
         } 
         if(this.xpos >= (paddleTwo.xpos - this.radius)){
-            if(this.ypos > paddleTwo.ypos && this.ypos < paddleTwo.ypos + paddleTwo.hpos){
+            if(this.ypos > paddleTwo.ypos - this.radius && this.ypos < paddleTwo.ypos + paddleTwo.hpos + this.radius){
                 this.dx *= -1
             }
         } 
@@ -183,7 +183,7 @@ function resetGame() {
 
     pong.xpos = canvas.width / 2;
     pong.ypos = canvas.height / 2;
-    pong.velocity = 6;
+    pong.velocity = 10;
 
     pong.dx = 1;
     pong.dy = 1;
