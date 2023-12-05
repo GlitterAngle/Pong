@@ -6,7 +6,7 @@ const reset = document.querySelector('button')
 
 //window 
 
-canvas.width = 1800
+canvas.width = 1400
 canvas.height = 1000
 
 canvas.style.width = (canvas.width / 2) + 'px'
@@ -18,14 +18,13 @@ canvas.style.background = 'black'
 
 //pieces 
 class Score{
-    constructor(num, xpos, ypos, color){
+    constructor(num, xpos, ypos){
         this.num = num
         this.xpos = xpos
         this.ypos = ypos
-        this.color = color
     }
     write(){
-        context.fillStyle= this.color
+        context.fillStyle= 'white'
         context.font = '50px Arial'
         context.fillText(this.num, this.xpos, this.ypos)
     }
@@ -33,7 +32,7 @@ class Score{
 
 class Paddle{
     constructor(xpos,ypos,wpos,hpos, color, speed, isPaddleOne){
-        this.xpos = isPaddleOne ? xpos/ 2 - 900 : xpos /2 + 840
+        this.xpos = isPaddleOne ? xpos/ 2 - 700 : xpos /2 + 650
         this.ypos = isPaddleOne ? ypos/2  : ypos/2
         this.wpos = wpos
         this.hpos = hpos
@@ -114,13 +113,13 @@ class Circle{
     }
 }
 
-let pong = new Circle(canvas.width/2, canvas.height/2, 20, '#5ffbf1', 10)
+let pong = new Circle(canvas.width/2, canvas.height/2, 20, 'white', 2)
 
-let paddleOne = new Paddle(canvas.width, canvas.height, 60, 200,'#5ffbf1', 60, true)
-let paddleTwo = new Paddle(canvas.width, canvas.height,60,200, '#5ffbf1', 60, false)
+let paddleOne = new Paddle(canvas.width, canvas.height, 60, 200,'whie', 30, true)
+let paddleTwo = new Paddle(canvas.width, canvas.height,60,200, 'white', 30, false)
 
-let scoreTwo = new Score( 0 , canvas.width - 200,canvas.height - 850, '#5ffbf1')
-let scoreOne = new Score( 0, canvas.width - 1599, canvas.height - 850, '#5ffbf1')
+let scoreTwo = new Score( 0 , canvas.width - 200,canvas.height - 850)
+let scoreOne = new Score( 0, canvas.width - 1200, canvas.height - 850)
 //event listeners
 
 
@@ -131,22 +130,22 @@ window.addEventListener('keydown', (e) => {
     switch (e.keyCode) {
         case 38:  
             if (currentTwo > 0) {
-                paddleTwo.ypos -= paddleTwo.speed
+                paddleTwo.ypos -= paddleTwo.speed;
             }
             break
         case 40:  
             if (currentTwo + paddleTwo.hpos < canvas.height) {
-                paddleTwo.ypos += paddleTwo.speed
+                paddleTwo.ypos += paddleTwo.speed;
             }
             break
         case 87:  
             if (currentOne > 0) {
-                paddleOne.ypos -= paddleOne.speed
+                paddleOne.ypos -= paddleOne.speed;
             }
             break
         case 83:  
             if (currentOne + paddleOne.hpos < canvas.height) {
-                paddleOne.ypos += paddleOne.speed
+                paddleOne.ypos += paddleOne.speed;
             }
             break
     }
@@ -154,7 +153,9 @@ window.addEventListener('keydown', (e) => {
     
 })
 
-// reset.addEventListener('click', resetGame)
+reset.addEventListener('click', render())
+
+//functions
 
 function updateScoreOne(value){
     let sum = value
@@ -170,32 +171,6 @@ function updateScoreTwo(value){
         return scoreTwo.num = sum
     }
 }
-
-
-//functions 
-
-function resetGame() {
-    scoreOne.num = 0
-    scoreTwo.num = 0
-
-    paddleOne.ypos = canvas.height / 2;
-    paddleTwo.ypos = canvas.height / 2;
-
-    pong.xpos = canvas.width / 2;
-    pong.ypos = canvas.height / 2;
-    pong.velocity = 6;
-
-    pong.dx = 1;
-    pong.dy = 1;
-    paddleOne.speed = 60;
-    paddleTwo.speed = 60;
-
-    context.clearRect(0, 0, canvas.width, canvas.height);
-
-     pong.randomStart() 
-}
-
-
 function stopGame(){
     pong.velocity= 0
     paddleOne.speed = 0
@@ -204,15 +179,15 @@ function stopGame(){
 
 function checkForWinner(scoreOne,scoreTwo){
     if(scoreOne.num === 5){
-        context.fillStyle= '#d16ba5'
-        context.font = '100px Courier New'
-        context.fillText ('Player One Wins!',canvas.width/2 - 450 , canvas.height/2 - 100)
+        context.fillStyle= 'white'
+        context.font = '100px Arial'
+        context.fillText ('Player One Wins!',canvas.width/2 - 350 , canvas.height/2 - 100)
         stopGame()
     }
     if(scoreTwo.num === 5){
-        context.fillStyle= '#d16ba5'
-        context.font = '100px Courier New'
-        context.fillText ('Player Two Wins!', canvas.width/2 - 450, canvas.height/2 - 100)
+        context.fillStyle= 'white'
+        context.font = '100px Arial'
+        context.fillText ('Player Two Wins!', canvas.width/2 - 350, canvas.height/2 - 100)
         stopGame()
     }
     
@@ -220,15 +195,13 @@ function checkForWinner(scoreOne,scoreTwo){
 
 
 function render() {
-    pong.randomStart()
     updateBoard()
 }
 
-
 function updateBoard(){
-    context.clearRect(0, 0, canvas.width, canvas.height)
-    paddleOne.create(context)
-    paddleTwo.create(context)
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    paddleOne.create(context);
+    paddleTwo.create(context);
     scoreOne.write()
     scoreTwo.write()
     requestAnimationFrame(updateBoard)
@@ -237,7 +210,8 @@ function updateBoard(){
     updateScoreOne(scoreOne.num)
     updateScoreTwo(scoreTwo.num)
     pong.checkOutOfBounds()
-    pong.draw(context)  
+    pong.draw(context)
 }
+
 
 render()

@@ -14,8 +14,8 @@ body{
 }
 
 canvas{
-    border: #d16ba5 2px solid;
-    border-radius: 10px;
+     border: #d16ba5 2px solid; 
+     border-radius: 10px;
 }
 
 #name{
