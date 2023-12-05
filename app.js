@@ -153,9 +153,7 @@ window.addEventListener('keydown', (e) => {
     
 })
 
-reset.addEventListener('click', render())
-
-//functions
+reset.addEventListener('click', resetGame)
 
 function updateScoreOne(value){
     let sum = value
@@ -171,6 +169,32 @@ function updateScoreTwo(value){
         return scoreTwo.num = sum
     }
 }
+
+
+// ... (your existing code)
+
+function resetGame() {
+    scoreOne.num = 0
+    scoreTwo.num = 0
+
+    paddleOne.ypos = canvas.height / 2;
+    paddleTwo.ypos = canvas.height / 2;
+
+    pong.xpos = canvas.width / 2;
+    pong.ypos = canvas.height / 2;
+    pong.velocity = 2;
+
+    pong.dx = 1;
+    pong.dy = 1;
+    paddleOne.speed = 30;
+    paddleTwo.speed = 30;
+
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+     pong.randomStart()
+}
+
+
 function stopGame(){
     pong.velocity= 0
     paddleOne.speed = 0
@@ -195,13 +219,15 @@ function checkForWinner(scoreOne,scoreTwo){
 
 
 function render() {
+    pong.randomStart()
     updateBoard()
 }
 
+
 function updateBoard(){
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    paddleOne.create(context);
-    paddleTwo.create(context);
+    context.clearRect(0, 0, canvas.width, canvas.height)
+    paddleOne.create(context)
+    paddleTwo.create(context)
     scoreOne.write()
     scoreTwo.write()
     requestAnimationFrame(updateBoard)
@@ -210,8 +236,7 @@ function updateBoard(){
     updateScoreOne(scoreOne.num)
     updateScoreTwo(scoreTwo.num)
     pong.checkOutOfBounds()
-    pong.draw(context)
+    pong.draw(context)  
 }
-
 
 render()
