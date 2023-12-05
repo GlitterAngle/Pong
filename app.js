@@ -68,29 +68,39 @@ class Circle{
         context.stroke()
         context.closePath()
     }
+    enabled = true
+
     bounce(){ // creates movement of the ball 
         this.draw(context) 
     
         if (this.ypos <= 0 + this.radius || this.ypos >= canvas.height - this.radius){
             this.dy *= -1
         }
+        this.xpos += this.dx * this.velocity
+        this.ypos += this.dy * this.velocity
         //bounce off paddle
         if(this.xpos <= (paddleOne.xpos + paddleOne.wpos +this.radius)){
+            if (!this.enabled){
+                return}
             if(this.ypos > paddleOne.ypos - this.radius && this.ypos < paddleOne.ypos + paddleOne.hpos + this.radius){
                 this.dx *= -1
+                this.enabled = false
+                setTimeout(() => {
+                    this.enabled = true
+                }, 250)
             }
         } 
         if(this.xpos >= (paddleTwo.xpos - this.radius)){
+            if (!this.enabled){
+                return}
             if(this.ypos > paddleTwo.ypos - this.radius && this.ypos < paddleTwo.ypos + paddleTwo.hpos + this.radius){
                 this.dx *= -1
+                this.enabled = false
+                setTimeout(() => {
+                    this.enabled = true
+                }, 250)
             }
         } 
-       
-        
-
-
-        this.xpos += this.dx * this.velocity
-        this.ypos += this.dy * this.velocity
     }
     randomStart(){ //makes the ball go in a random direction 
         
