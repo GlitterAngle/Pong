@@ -16,6 +16,7 @@ body{
 canvas{
      border: #d16ba5 2px solid; 
      border-radius: 10px;
+     box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.2)
 }
 
 #name{
@@ -35,6 +36,9 @@ button{
     border-radius: 6px;
     border: #d16ba5 4px solid;
     background-color: black;
-    
+}
+
+button:active {
+    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2)
 }
 

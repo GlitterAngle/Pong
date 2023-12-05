@@ -33,8 +33,8 @@ class Score{
 
 class Paddle{
     constructor(xpos,ypos,wpos,hpos, color, speed, isPaddleOne){
-        this.xpos = isPaddleOne ? xpos/ 2 - 900 : xpos /2 + 840
-        this.ypos = isPaddleOne ? ypos/2  : ypos/2
+        this.xpos = isPaddleOne ? xpos/ 2 - 900 : xpos /2 + 850
+        this.ypos = isPaddleOne ? ypos/2 : ypos/2 
         this.wpos = wpos
         this.hpos = hpos
         this.color = color
