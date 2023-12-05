@@ -164,6 +164,8 @@ window.addEventListener('keydown', (e) => {
     
 })
 
+
+
 reset.addEventListener('click', resetGame)
 
 function updateScoreOne(value){
