@@ -113,9 +113,9 @@ class Circle{
     }
 }
 
-let pong = new Circle(canvas.width/2, canvas.height/2, 20, 'white', 6)
+let pong = new Circle(canvas.width/2, canvas.height/2, 20, 'white', 10)
 
-let paddleOne = new Paddle(canvas.width, canvas.height, 60, 200,'whie', 60, true)
+let paddleOne = new Paddle(canvas.width, canvas.height, 60, 200,'white', 60, true)
 let paddleTwo = new Paddle(canvas.width, canvas.height,60,200, 'white', 60, false)
 
 let scoreTwo = new Score( 0 , canvas.width - 200,canvas.height - 850)

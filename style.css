@@ -1,5 +1,40 @@
+html{
+    min-height: 100%;
+}
 body{
     text-align: center;
     padding: 50px;
+    margin: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+    
+    
+}
+
+canvas{
+    border: #d16ba5 2px solid;
+    border-radius: 10px;
+}
+
+#name{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 70px;
+    font-weight: bolder;
+    -webkit-text-stroke-color: #d16ba5;
+    -webkit-text-stroke-width: 2px;
+}
+
+button{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 25px;
+    color: #d16ba5;
+    margin-top: 30px;
+    padding: 12px;
+    border-radius: 6px;
+    border: #d16ba5 4px solid;
+    background-color: black;
+    
 }
 
