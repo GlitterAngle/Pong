@@ -68,7 +68,7 @@ class Circle{
         context.stroke()
         context.closePath()
     }
-    enabled = true
+    enabledBounce = true
 
     bounce(){ // creates movement of the ball 
         this.draw(context) 
@@ -80,24 +80,24 @@ class Circle{
         this.ypos += this.dy * this.velocity
         //bounce off paddle
         if(this.xpos <= (paddleOne.xpos + paddleOne.wpos +this.radius)){
-            if (!this.enabled){
+            if (!this.enabledBounce){
                 return}
             if(this.ypos > paddleOne.ypos - this.radius && this.ypos < paddleOne.ypos + paddleOne.hpos + this.radius){
                 this.dx *= -1
-                this.enabled = false
+                this.enabledBounce = false
                 setTimeout(() => {
-                    this.enabled = true
+                    this.enabledBounce = true
                 }, 250)
             }
         } 
         if(this.xpos >= (paddleTwo.xpos - this.radius)){
-            if (!this.enabled){
+            if (!this.enabledBounce){
                 return}
             if(this.ypos > paddleTwo.ypos - this.radius && this.ypos < paddleTwo.ypos + paddleTwo.hpos + this.radius){
                 this.dx *= -1
-                this.enabled = false
+                this.enabledBounce = false
                 setTimeout(() => {
-                    this.enabled = true
+                    this.enabledBounce = true
                 }, 250)
             }
         } 
