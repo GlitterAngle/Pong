@@ -131,7 +131,7 @@ window.addEventListener('keydown', (e) => {
     switch (e.keyCode) {
         case 38:  
             if (currentTwo > 0) {
-                paddleTwo.ypos -= paddleTwo.speed
+                paddleTwo.ypos = Math.max(paddleTwo.ypos - paddleTwo.speed, 0)
             }
             break
         case 40:  
@@ -141,7 +141,7 @@ window.addEventListener('keydown', (e) => {
             break
         case 87:  
             if (currentOne > 0) {
-                paddleOne.ypos -= paddleOne.speed
+                paddleOne.ypos = Math.max(paddleOne.ypos - paddleOne.speed, 0)
             }
             break
         case 83:  
