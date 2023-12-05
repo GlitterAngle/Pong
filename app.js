@@ -113,10 +113,10 @@ class Circle{
     }
 }
 
-let pong = new Circle(canvas.width/2, canvas.height/2, 20, 'white', 2)
+let pong = new Circle(canvas.width/2, canvas.height/2, 20, 'white', 6)
 
-let paddleOne = new Paddle(canvas.width, canvas.height, 60, 200,'whie', 30, true)
-let paddleTwo = new Paddle(canvas.width, canvas.height,60,200, 'white', 30, false)
+let paddleOne = new Paddle(canvas.width, canvas.height, 60, 200,'whie', 60, true)
+let paddleTwo = new Paddle(canvas.width, canvas.height,60,200, 'white', 60, false)
 
 let scoreTwo = new Score( 0 , canvas.width - 200,canvas.height - 850)
 let scoreOne = new Score( 0, canvas.width - 1200, canvas.height - 850)
@@ -171,7 +171,7 @@ function updateScoreTwo(value){
 }
 
 
-// ... (your existing code)
+//functions 
 
 function resetGame() {
     scoreOne.num = 0
