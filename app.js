@@ -182,16 +182,16 @@ function resetGame() {
 
     pong.xpos = canvas.width / 2;
     pong.ypos = canvas.height / 2;
-    pong.velocity = 2;
+    pong.velocity = 6;
 
     pong.dx = 1;
     pong.dy = 1;
-    paddleOne.speed = 30;
-    paddleTwo.speed = 30;
+    paddleOne.speed = 60;
+    paddleTwo.speed = 60;
 
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-     pong.randomStart()
+     pong.randomStart() 
 }
 
 
