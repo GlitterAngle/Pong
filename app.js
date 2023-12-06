@@ -4,6 +4,7 @@ let context = canvas.getContext('2d')
 const msg = document.getElementById('msg')
 const reset = document.querySelector('button')
 
+
 //window 
 
 canvas.width = 1800
@@ -68,11 +69,13 @@ class Circle{
         context.stroke()
         context.closePath()
     }
+    
     enabledBounce = true
 
     bounce(){ // creates movement of the ball 
         this.draw(context) 
-    
+        let sound = new Audio()
+        sound.src = 'asset/pongSound_01.wav'
         if (this.ypos <= 0 + this.radius || this.ypos >= canvas.height - this.radius){
             this.dy *= -1
         }
@@ -84,7 +87,11 @@ class Circle{
                 return}
             if(this.ypos > paddleOne.ypos - this.radius && this.ypos < paddleOne.ypos + paddleOne.hpos + this.radius){
                 this.dx *= -1
+                this.velocity ++
+                paddleOne.speed ++
+                paddleTwo.speed ++
                 this.enabledBounce = false
+                sound.play();
                 setTimeout(() => {
                     this.enabledBounce = true
                 }, 250)
@@ -95,10 +102,15 @@ class Circle{
                 return}
             if(this.ypos > paddleTwo.ypos - this.radius && this.ypos < paddleTwo.ypos + paddleTwo.hpos + this.radius){
                 this.dx *= -1
+                this.velocity ++
+                paddleOne.speed ++
+                paddleTwo.speed ++
                 this.enabledBounce = false
+                sound.play();
                 setTimeout(() => {
                     this.enabledBounce = true
                 }, 250)
+                
             }
         } 
     }
@@ -164,9 +176,7 @@ window.addEventListener('keydown', (e) => {
     
 })
 
-function handleKeyUp(e){
 
-}
 
 reset.addEventListener('click', resetGame)
 
