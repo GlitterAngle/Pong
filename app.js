@@ -165,8 +165,7 @@ window.addEventListener('keydown', (e) => {
 })
 
 function handleKeyUp(e){
-    e.preventDefault();
-    if (e.key === input.key) input.key = null;
+
 }
 
 reset.addEventListener('click', resetGame)

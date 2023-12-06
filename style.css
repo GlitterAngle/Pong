@@ -3,11 +3,9 @@ html{
 }
 body{
     text-align: center;
-    padding: 50px;
     margin: 0;
     background-size: cover;
     background-repeat: no-repeat;
-
     background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
     
     
@@ -31,8 +29,7 @@ button{
     font-family: 'Courier New', Courier, monospace;
     font-size: 25px;
     color: #d16ba5;
-    margin-top: 30px;
-    padding: 12px;
+    margin-top: 20px;
     border-radius: 6px;
     border: #d16ba5 4px solid;
     background-color: black;
