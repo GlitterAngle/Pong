@@ -146,10 +146,10 @@ let pong = new Circle(canvas.width/2, canvas.height/2, 20, '#5ffbf1', 10)
 let paddleOne = new Paddle(canvas.width, canvas.height, 60, 200,'#5ffbf1', 60, true)
 let paddleTwo = new Paddle(canvas.width, canvas.height,60,200, '#5ffbf1', 60, false)
 
-let scoreTwo = new Score( 0 , canvas.width - 200,canvas.height - 850, '#5ffbf1')
+let scoreTwo = new Score( 0 , canvas.width - 250,canvas.height - 850, '#5ffbf1')
 let scoreOne = new Score( 0, canvas.width - 1599, canvas.height - 850, '#5ffbf1')
-//event listeners
 
+//event listeners
 
 window.addEventListener('keydown', (e) => {
     let currentOne = paddleOne.getCurrentY()
@@ -194,12 +194,25 @@ function updateScoreOne(value){
         return scoreOne.num = sum
     }
 }
+function playerOneName(){
+    context.fillStyle = '#5ffbf1'
+    context.font = '50px Courier New'
+    context.fillText('Player One', canvas.width/2 - 860 
+    , canvas.height/2 - 450 )
+}
 function updateScoreTwo(value){
     let sum =value
     if(scoreTwo && pong.xpos < 0){
         sum++
         return scoreTwo.num = sum
     }
+}
+
+function playerTwoName(){
+    context.fillStyle = '#5ffbf1'
+    context.font = '50px Courier New'
+    context.fillText('Player Two', canvas.width - 400 
+    , canvas.height/2 - 450 )
 }
 
 
@@ -264,7 +277,9 @@ function updateBoard(){
     paddleOne.create(context)
     paddleTwo.create(context)
     scoreOne.write()
+    playerOneName()
     scoreTwo.write()
+    playerTwoName()
     backgroundMusic.play()
     requestAnimationFrame(updateBoard)
     pong.bounce()
@@ -275,6 +290,13 @@ function updateBoard(){
     pong.draw(context)  
 }
 
+context.fillStyle = '#d16ba5'
+    context.font = '100px Courier New'
+    context.fillText('Press Space To Play !', canvas.width/2 - 600 , canvas.height/2 )
 
+window.addEventListener('keydown', function(e){
+    if (e.keyCode === 32 ){
+    render()}
+})
 
-render()
+start()
