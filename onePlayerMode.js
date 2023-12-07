@@ -34,7 +34,7 @@ class Score{
 
 class Paddle{
     constructor(xpos,ypos,wpos,hpos, color, speed, isPaddleOne){
-        this.xpos = isPaddleOne ? xpos/ 2 - 900 : xpos /2 + 850 
+        this.xpos = isPaddleOne ? xpos/ 2 - 900 : xpos /2 + 850
         this.ypos = isPaddleOne ? ypos/2 : ypos/2 
         this.wpos = wpos
         this.hpos = hpos
@@ -82,45 +82,45 @@ class Circle{
         this.xpos += this.dx * this.velocity
         this.ypos += this.dy * this.velocity
         //bounce off paddle
-        if(this.xpos <= (paddleTwo.xpos + paddleTwo.wpos +this.radius)){
+        // if(this.xpos <= (paddleOne.xpos + paddleOne.wpos +this.radius)){
+        //     if (!this.enabledBounce){
+        //         return}
+        //     if(this.ypos > paddleOne.ypos - this.radius && this.ypos < paddleOne.ypos + paddleOne.hpos + this.radius){
+        //         this.dx *= -1
+        //         this.velocity ++
+        //         paddleOne.speed ++
+        //         paddleTwo.speed ++
+        //         this.enabledBounce = false
+        //         sound.play();
+        //         setTimeout(() => {
+        //             this.enabledBounce = true
+        //         }, 250)
+        //     }
+        // } 
+        if(this.xpos <= (aiPaddle.xpos + aiPaddle.wpos +this.radius)){
+            if (!this.enabledBounce){
+                return}
+            if(this.ypos > aiPaddle.ypos - this.radius && this.ypos < aiPaddle.ypos + aiPaddle.hpos + this.radius){
+                this.dx *= -1
+                this.velocity ++
+                aiPaddle.speed ++
+                paddleTwo.speed ++
+                this.enabledBounce = false
+                sound.play();
+                setTimeout(() => {
+                    this.enabledBounce = true
+                }, 250)
+            }
+        } 
+        if(this.xpos >= (paddleTwo.xpos - this.radius)){
             if (!this.enabledBounce){
                 return}
             if(this.ypos > paddleTwo.ypos - this.radius && this.ypos < paddleTwo.ypos + paddleTwo.hpos + this.radius){
                 this.dx *= -1
                 this.velocity ++
-                paddleOne.speed ++
+                aiPaddle.speed ++
+                // paddleOne.speed ++
                 paddleTwo.speed ++
-                this.enabledBounce = false
-                sound.play();
-                setTimeout(() => {
-                    this.enabledBounce = true
-                }, 250)
-            }
-        } 
-        if(this.xpos <= (aIpaddle.xpos + aIpaddle.wpos +this.radius)){
-            if (!this.enabledBounce){
-                return}
-            if(this.ypos > aIpaddle.ypos - this.radius && this.ypos < aIpaddle.ypos + aIpaddle.hpos + this.radius){
-                this.dx *= -1
-                this.velocity ++
-                paddleOne.speed ++
-                aIpaddle.speed ++
-                this.enabledBounce = false
-                sound.play();
-                setTimeout(() => {
-                    this.enabledBounce = true
-                }, 250)
-            }
-        } 
-        if(this.xpos >= (paddleOne.xpos - this.radius)){
-            if (!this.enabledBounce){
-                return}
-            if(this.ypos > paddleOne.ypos - this.radius && this.ypos < paddleOne.ypos + paddleOne.hpos + this.radius){
-                this.dx *= -1
-                this.velocity ++
-                paddleOne.speed ++
-                paddleTwo.speed ++
-                aIpaddle.speed ++
                 this.enabledBounce = false
                 sound.play();
                 setTimeout(() => {
@@ -154,9 +154,10 @@ class Circle{
 
 let pong = new Circle(canvas.width/2, canvas.height/2, 20, '#5ffbf1', 10)
 
-let paddleOne = new Paddle(canvas.width, canvas.height,60,200, '#5ffbf1', 60, true)
-// let paddleTwo = new Paddle(canvas.width, canvas.height, 60, 200,'#5ffbf1', 60, true)
-let aIpaddle = new Paddle(canvas.width, canvas.height, 60, 200,'#5ffbf1', 60, false)
+// let paddleOne = new Paddle(canvas.width, canvas.height, 60, 200,'#5ffbf1', 60, true)
+let paddleTwo = new Paddle(canvas.width, canvas.height,60,200, '#5ffbf1', 60, false)
+let aiPaddle = new Paddle(canvas.width, canvas.height, 60, 200,'#5ffbf1', 60, true)
+console.log(aiPaddle.create(context))
 
 let scoreTwo = new Score( 0 , canvas.width - 200,canvas.height - 850, '#5ffbf1')
 let scoreOne = new Score( 0, canvas.width - 1599, canvas.height - 850, '#5ffbf1')
@@ -164,30 +165,30 @@ let scoreOne = new Score( 0, canvas.width - 1599, canvas.height - 850, '#5ffbf1'
 
 
 window.addEventListener('keydown', (e) => {
-    let currentTwo = paddleOne.getCurrentY()
-    let currentOne = paddleTwo.getCurrentY()
+    // let currentOne = paddleOne.getCurrentY()
+    let currentTwo = paddleTwo.getCurrentY()
 
     switch (e.keyCode) {
         case 38:  
             if (currentTwo > 0) {
-                paddleOne.ypos = Math.max(paddleOne.ypos - paddleOne.speed, 0)
-            }
-            break
-        case 40:  
-            if (currentTwo + paddleOne.hpos < canvas.height) {
-                paddleOne.ypos += paddleOne.speed
-            }
-            break
-        case 87:  
-            if (currentOne > 0) {
                 paddleTwo.ypos = Math.max(paddleTwo.ypos - paddleTwo.speed, 0)
             }
             break
-        case 83:  
-            if (currentOne + paddleTwo.hpos < canvas.height) {
+        case 40:  
+            if (currentTwo + paddleTwo.hpos < canvas.height) {
                 paddleTwo.ypos += paddleTwo.speed
             }
             break
+        // case 87:  
+        //     if (currentOne > 0) {
+        //         paddleOne.ypos = Math.max(paddleOne.ypos - paddleOne.speed, 0)
+        //     }
+        //     break
+        // case 83:  
+        //     if (currentOne + paddleOne.hpos < canvas.height) {
+        //         paddleOne.ypos += paddleOne.speed
+        //     }
+        //     break
     }
 
     
@@ -218,9 +219,10 @@ function updateScoreTwo(value){
 function resetGame() {
     scoreOne.num = 0
     scoreTwo.num = 0
-    paddleOne.ypos = canvas.height / 2;
+
+    // paddleOne.ypos = canvas.height / 2;
     paddleTwo.ypos = canvas.height / 2;
-    aIpaddle.ypos = canvas.height / 2
+    aiPaddle.ypos = canvas.height / 2;
 
     pong.xpos = canvas.width / 2;
     pong.ypos = canvas.height / 2;
@@ -228,9 +230,9 @@ function resetGame() {
 
     pong.dx = 1;
     pong.dy = 1;
-    paddleOne.speed = 60;
+    // paddleOne.speed = 60;
     paddleTwo.speed = 60;
-    aIpaddle.speed = 60;
+    aiPaddle.speed = 60 ;
 
     context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -240,9 +242,9 @@ function resetGame() {
 
 function stopGame(){
     pong.velocity= 0
-    paddleOne.speed = 0
+    // paddleOne.speed = 0
     paddleTwo.speed = 0
-    aIpaddle.speed = 0
+    aiPaddle.speed = 0
 }
 
 function checkForWinner(scoreOne,scoreTwo){
@@ -270,9 +272,9 @@ function render() {
 
 function updateBoard(){
     context.clearRect(0, 0, canvas.width, canvas.height)
-    paddleOne.create(context)
+    // paddleOne.create(context)
     paddleTwo.create(context)
-    aIpaddle.create(context)
+    aiPaddle.create(context)
     scoreOne.write()
     scoreTwo.write()
     requestAnimationFrame(updateBoard)
