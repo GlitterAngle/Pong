@@ -204,29 +204,37 @@ window.addEventListener('keydown', (e) => {
 
 reset.addEventListener('click', resetGame)
 
-function moveAiPaddle(paddle, y){
-    aiPaddle.y = y
-    if (aiPaddle.y > 0) {
-                this.aiPaddle.ypos = Math.max(this.aiPaddle.ypos - this.aiPaddle.speed, 0)
-            }
-            if (aiPaddle.y + this.aiPaddle.hpos < canvas.height) {
-                this.aiPaddle.ypos += this.aiPaddle.speed
-            }
-   }
+// function moveAiPaddle(paddle, y){
+//     aiPaddle.ypos = y
+//     if (aiPaddle.ypos > 0) {
+//                 aiPaddle.ypos = Math.max(aiPaddle.ypos - aiPaddle.speed, 0)
+//             }
+//             if (aiPaddle.y + aiPaddle.hpos < canvas.height) {
+//                 aiPaddle.ypos += aiPaddle.speed
+//             }
+//    }
 
-let aiTargetgetY = canvas.height/2;
-function adjustAiTarget(){
-    aiTargetgetY = pong.ypos + (Math.random() & 60 - 30)
-}
+// let aiTargetgetY = canvas.height/2;
+// function adjustAiTarget(){
+//     aiTargetgetY = Math.round(pong.ypos + (Math.random() * 90 - 30))
+// }
+
+// function aiMovement(){
+//     if (pong.dx > 0){
+//         adjustAiTarget();
+//     }
+//     if(aiPaddle.ypos + aiPaddle.height/2 < aiTargetgetY){
+//         moveAiPaddle(aiPaddle, aiPaddle.ypos += aiPaddle.speed);
+//     }else{
+//         moveAiPaddle(aiPaddle, Math.max(aiPaddle.ypos -= aiPaddle.speed))
+//     }
+// }
 
 function aiMovement(){
-    if (pong.dx > 0){
-        adjustAiTarget();
-    }
-    if(aiPaddle.y + aiPaddle.height/2 < aiTargetgetY){
-        moveAiPaddle(aiPaddle, aiPaddle.y + aiPaddle.dy);
-    }else{
-        moveAiPaddle(aiPaddle, aiPaddle.y - aiPaddle.dy)
+    if (aiPaddle.ypos + aiPaddle.hpos / 2 < pong.ypos) {
+        aiPaddle.ypos = Math.min(aiPaddle.ypos + aiPaddle.speed, canvas.height - aiPaddle.hpos);
+    } else {
+        aiPaddle.ypos = Math.max(aiPaddle.ypos - aiPaddle.speed, 0);
     }
 }
 
@@ -313,7 +321,7 @@ function updateBoard(){
     scoreTwo.write()
     requestAnimationFrame(updateBoard)
     pong.bounce()
-    aiPaddle.aiMovement()
+    aiMovement()
     checkForWinner(scoreOne,scoreTwo)
     updateScoreOne(scoreOne.num)
     updateScoreTwo(scoreTwo.num)
