@@ -3,7 +3,12 @@ let canvas = document.getElementById('canvas')
 let context = canvas.getContext('2d')
 const msg = document.getElementById('msg')
 const reset = document.querySelector('button')
+const audioContext = new (window.AudioContext || window.AudioContext)();
+const backgroundMusic = new Audio();
 
+backgroundMusic.src = 'asset/bit-shift-kevin-macleod-main-version-24901-03-12.mp3';
+backgroundMusic.loop = true;
+backgroundMusic.autoplay = false;
 
 //window 
 
@@ -13,8 +18,8 @@ canvas.height = 1000
 canvas.style.width = (canvas.width / 2) + 'px'
 canvas.style.height = (canvas.height / 2) + 'px'
 
-
 canvas.style.background = 'black'
+
 
 
 //pieces 
@@ -91,10 +96,10 @@ class Circle{
                 paddleOne.speed ++
                 paddleTwo.speed ++
                 this.enabledBounce = false
-                sound.play();
                 setTimeout(() => {
                     this.enabledBounce = true
                 }, 250)
+                sound.play();
             }
         } 
         if(this.xpos >= (paddleTwo.xpos - this.radius)){
@@ -106,10 +111,10 @@ class Circle{
                 paddleOne.speed ++
                 paddleTwo.speed ++
                 this.enabledBounce = false
-                sound.play();
                 setTimeout(() => {
                     this.enabledBounce = true
                 }, 250)
+                sound.play();
                 
             }
         } 
@@ -180,6 +185,8 @@ window.addEventListener('keydown', (e) => {
 
 reset.addEventListener('click', resetGame)
 
+
+
 function updateScoreOne(value){
     let sum = value
     if (scoreOne && pong.xpos > canvas.width){
@@ -220,10 +227,13 @@ function resetGame() {
 }
 
 
+
 function stopGame(){
     pong.velocity= 0
     paddleOne.speed = 0
     paddleTwo.speed = 0
+    backgroundMusic.pause()
+    backgroundMusic.currentTime = 0
 }
 
 function checkForWinner(scoreOne,scoreTwo){
@@ -255,6 +265,7 @@ function updateBoard(){
     paddleTwo.create(context)
     scoreOne.write()
     scoreTwo.write()
+    backgroundMusic.play()
     requestAnimationFrame(updateBoard)
     pong.bounce()
     checkForWinner(scoreOne,scoreTwo)
@@ -263,5 +274,7 @@ function updateBoard(){
     pong.checkOutOfBounds()
     pong.draw(context)  
 }
+
+
 
 render()
