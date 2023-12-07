@@ -29,7 +29,8 @@ button{
     font-family: 'Courier New', Courier, monospace;
     font-size: 25px;
     color: #d16ba5;
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     border-radius: 6px;
     border: #d16ba5 4px solid;
     background-color: black;
