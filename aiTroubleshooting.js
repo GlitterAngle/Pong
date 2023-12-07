@@ -40,6 +40,8 @@ class Paddle{
         this.hpos = hpos
         this.color = color
         this.speed = speed
+        this.speedU = 0
+        this.speedD = 0
     }
     create(context) {
         context.fillStyle = this.color
@@ -172,6 +174,7 @@ let scoreOne = new Score( 0, canvas.width - 1599, canvas.height - 850, '#5ffbf1'
 
 window.addEventListener('keydown', (e) => {
     // let currentOne = paddleOne.getCurrentY()
+    
     let currentTwo = paddleTwo.getCurrentY()
 
     switch (e.keyCode) {
@@ -185,6 +188,10 @@ window.addEventListener('keydown', (e) => {
                 paddleTwo.ypos += paddleTwo.speed
             }
             break
+
+            setTimeout(() => {
+                this.enabledBounce = true
+            }, 250)
         // case 87:  
         //     if (currentOne > 0) {
         //         paddleOne.ypos = Math.max(paddleOne.ypos - paddleOne.speed, 0)
@@ -199,7 +206,6 @@ window.addEventListener('keydown', (e) => {
 
     
 })
-
 
 
 reset.addEventListener('click', resetGame)
@@ -231,7 +237,7 @@ reset.addEventListener('click', resetGame)
 // }
 
 function aiMovement(){
-    if (aiPaddle.ypos + aiPaddle.hpos / 2 < pong.ypos) {
+    if (aiPaddle.ypos + aiPaddle.hpos / 2 < pong.ypos) { 
         aiPaddle.ypos = Math.min(aiPaddle.ypos + aiPaddle.speed, canvas.height - aiPaddle.hpos);
     } else {
         aiPaddle.ypos = Math.max(aiPaddle.ypos - aiPaddle.speed, 0);
