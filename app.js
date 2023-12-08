@@ -229,22 +229,23 @@ function playerTwoName(){
 //functions 
 
 function backgroundMusicControl(){
+    
     backgroundMusic.play()
     
     if(isPlaying){
-        backgroundMusic.pause()
+        backgroundMusic.play()
         backgroundMusic.currentTime = 0
-        toggleMusic.textContent = "Pause Music"
+        toggleMusic.textContent = "Music Playing"
         isPlaying = false
         
     } else {
-        backgroundMusic.play()
+        backgroundMusic.pause()
         backgroundMusic.currentTime = 0
-        toggleMusic.textContent = "Play Music"
+        toggleMusic.textContent = "Music Paused"
         isPlaying = true
         
     }
-    
+
 }
 
 function resetGame() {
