@@ -7,6 +7,7 @@ const toggleMusic = document.getElementById('toggleMusic')
 // const audioContext = new (window.AudioContext);
 const backgroundMusic = new Audio();
 
+backgroundMusic.src = 'asset/bit-shift-kevin-macleod-main-version-24901-03-12.mp3';
 let isPlaying = true;
 
 let scoreSound = new Audio()
@@ -228,22 +229,17 @@ function playerTwoName(){
 //functions 
 
 function backgroundMusicControl(){
-
-    backgroundMusic.src = 'asset/bit-shift-kevin-macleod-main-version-24901-03-12.mp3';
-    // backgroundMusic.loop = true;
-    
-
     if(isPlaying){
         backgroundMusic.pause()
         backgroundMusic.currentTime = 0
-        return isPlaying = true
+        isPlaying = false
         
     } else {
         backgroundMusic.play()
         backgroundMusic.currentTime = 0
-        isPlaying = false
+        isPlaying = true
     }
-    // isPlaying = !isPlaying
+    
     
 }
 
