@@ -3,22 +3,20 @@ let canvas = document.getElementById('canvas')
 let context = canvas.getContext('2d')
 const msg = document.getElementById('msg')
 const reset = document.querySelector('button')
-const audioContext = new (window.AudioContext || window.AudioContext)();
+const toggleMusic = document.getElementById('toggleMusic')
+
+
 const backgroundMusic = new Audio();
-
 backgroundMusic.src = 'asset/bit-shift-kevin-macleod-main-version-24901-03-12.mp3';
-backgroundMusic.loop = true;
-backgroundMusic.autoplay = false;
-
-
-
+let isPlaying = true;
 
 let scoreSound = new Audio()
 scoreSound.src = 'asset/notification-positive-bleep-joshua-chivers-1-00-01.mp3'
 //window 
 
-canvas.width = 1800
+heightRatio = 1.8
 canvas.height = 1000
+canvas.width = canvas.height * 1.8
 
 canvas.style.width = (canvas.width / 2) + 'px'
 canvas.style.height = (canvas.height / 2) + 'px'
@@ -192,6 +190,7 @@ window.addEventListener('keydown', (e) => {
     
 })
 
+toggleMusic.addEventListener('click', backgroundMusicControl)
 
 
 reset.addEventListener('click', resetGame)
@@ -228,6 +227,25 @@ function playerTwoName(){
 
 
 //functions 
+
+function backgroundMusicControl(){
+    backgroundMusic.play()
+    
+    if(isPlaying){
+        backgroundMusic.pause()
+        backgroundMusic.currentTime = 0
+        toggleMusic.textContent = "Pause Music"
+        isPlaying = false
+        
+    } else {
+        backgroundMusic.play()
+        backgroundMusic.currentTime = 0
+        toggleMusic.textContent = "Play Music"
+        isPlaying = true
+        
+    }
+    
+}
 
 function resetGame() {
     scoreOne.num = 0
@@ -280,6 +298,7 @@ function checkForWinner(scoreOne,scoreTwo){
 function render() {
     pong.randomStart()
     updateBoard()
+    backgroundMusicControl()
 }
 
 
@@ -291,7 +310,6 @@ function updateBoard(){
     playerOneName()
     scoreTwo.write()
     playerTwoName()
-    backgroundMusic.play()
     requestAnimationFrame(updateBoard)
     pong.bounce()
     checkForWinner(scoreOne,scoreTwo)
@@ -316,4 +334,5 @@ window.addEventListener('keydown', function(e){
     render()}
 })
 
-start()
+ 
+
