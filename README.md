@@ -10,21 +10,31 @@ This is a recreation of the classic game from the 70s. Two players can play, who
 I used HTML CSS and JavaScript to complete my game!
 
 ## Wire Frames 
-Initial landing view
-<img width="989" alt="Screenshot 2023-11-30 at 8 33 26 PM" src="https://github.com/GlitterAngle/Pong/assets/138747127/3af39682-b966-4dfa-9694-d99650aef481">
+Initial Landing
 
-Results 
-<img width="985" alt="Screenshot 2023-11-30 at 8 31 07 PM" src="https://github.com/GlitterAngle/Pong/assets/138747127/44e71e32-991e-48cb-81da-5d120be217a2">
+<img width="1470" alt="Screenshot 2023-12-08 at 11 06 09 AM" src="https://github.com/GlitterAngle/Pong/assets/138747127/8fb93358-5ad6-44fa-8eb5-11652e02137f">
+
+Game Play 
+
+<img width="1470" alt="Screenshot 2023-12-08 at 11 33 03 AM" src="https://github.com/GlitterAngle/Pong/assets/138747127/b116c22b-06f2-4c24-b104-4eee51b2ed69">
+
+Win/Lose
+
+<img width="1470" alt="Screenshot 2023-12-08 at 11 30 25 AM" src="https://github.com/GlitterAngle/Pong/assets/138747127/f60e34d8-996b-4c64-9365-80c4f5b98282">
+
+### Explain my code ?
+
+![meme](https://github.com/GlitterAngle/Pong/assets/138747127/1358c69e-56aa-4d1c-9e80-01de0c393221)
 
 
 
 #### MVP Goals 
 
-- As a player I want my game to recognize when the ball is off screen so a winner is declared. 
-- As a player, I would like to be informed when the game is over.
-- As a player for those who require assistive technolog ies,I would like accessibility features so that others are not left out of enjoying the game.
-- As a player, I would like to be able to restart the game after a round is done.
-- As a player, I would like the UI to be engaging and easy on the eyes
+- As a player I want my game to recognize when the ball is off screen so a winner is declared. Completed
+- As a player, I would like to be informed when the game is over. Completed
+- As a player for those who require assistive technolog ies,I would like accessibility features so that others are not left out of enjoying the game. Completed but want to add more 
+- As a player, I would like to be able to restart the game after a round is done. Completed
+- As a player, I would like the UI to be engaging and easy on the eyes. Completed
 
 #### Stretch Goals
 
