@@ -12,7 +12,7 @@ body{
 }
 
 #canvas{
-    height: 100%;
+    width: 100%;
      border: #d16ba5 2px solid; 
      border-radius: 10px;
      box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.2)
@@ -43,8 +43,3 @@ button:active {
 
 
 
-@media screen {
-    html{
-        min-height: fit-content;
-    }
-}

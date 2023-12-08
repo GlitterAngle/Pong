@@ -4,9 +4,9 @@ let context = canvas.getContext('2d')
 const msg = document.getElementById('msg')
 const reset = document.querySelector('button')
 const toggleMusic = document.getElementById('toggleMusic')
-// const audioContext = new (window.AudioContext);
-const backgroundMusic = new Audio();
 
+
+const backgroundMusic = new Audio();
 backgroundMusic.src = 'asset/bit-shift-kevin-macleod-main-version-24901-03-12.mp3';
 let isPlaying = true;
 
@@ -229,6 +229,8 @@ function playerTwoName(){
 //functions 
 
 function backgroundMusicControl(){
+    backgroundMusic.play()
+    
     if(isPlaying){
         backgroundMusic.pause()
         backgroundMusic.currentTime = 0
@@ -297,7 +299,6 @@ function render() {
     pong.randomStart()
     updateBoard()
     backgroundMusicControl()
-    backgroundMusic.play()
 }
 
 
