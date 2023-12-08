@@ -232,14 +232,16 @@ function backgroundMusicControl(){
     if(isPlaying){
         backgroundMusic.pause()
         backgroundMusic.currentTime = 0
+        toggleMusic.textContent = "Pause Music"
         isPlaying = false
         
     } else {
         backgroundMusic.play()
         backgroundMusic.currentTime = 0
+        toggleMusic.textContent = "Play Music"
         isPlaying = true
+        
     }
-    
     
 }
 
