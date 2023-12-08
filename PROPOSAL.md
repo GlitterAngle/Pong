@@ -22,7 +22,7 @@ Results
 
 - As a player I want my game to recognize when the ball is off screen so a winner is declared.
 - As a player, I would like to be informed when the game is over.
-- As a player who requires assistive technologies, I would like accessibility features so that I'm not left out of enjoying the game.
+- As a player for those who require assistive technolog ies,I would like accessibility features so that others are not left out of enjoying the game.
 - As a player, I would like to be able to restart the game after a round is done.
 - As a player, I would like the UI to be engaging and easy on the eyes
 

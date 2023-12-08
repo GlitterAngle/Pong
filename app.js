@@ -10,6 +10,11 @@ backgroundMusic.src = 'asset/bit-shift-kevin-macleod-main-version-24901-03-12.mp
 backgroundMusic.loop = true;
 backgroundMusic.autoplay = false;
 
+
+
+
+let scoreSound = new Audio()
+scoreSound.src = 'asset/notification-positive-bleep-joshua-chivers-1-00-01.mp3'
 //window 
 
 canvas.width = 1800
@@ -79,10 +84,13 @@ class Circle{
 
     bounce(){ // creates movement of the ball 
         this.draw(context) 
+
         let sound = new Audio()
         sound.src = 'asset/pongSound_01.wav'
+        
         if (this.ypos <= 0 + this.radius || this.ypos >= canvas.height - this.radius){
             this.dy *= -1
+            sound.play()
         }
         this.xpos += this.dx * this.velocity
         this.ypos += this.dy * this.velocity
@@ -136,6 +144,7 @@ class Circle{
     }
     checkOutOfBounds(){
         if(this.xpos < 0 || this.xpos > canvas.width){
+            scoreSound.play()
             this.randomStart()
         }
     }
@@ -148,6 +157,8 @@ let paddleTwo = new Paddle(canvas.width, canvas.height,60,200, '#5ffbf1', 60, fa
 
 let scoreTwo = new Score( 0 , canvas.width - 250,canvas.height - 850, '#5ffbf1')
 let scoreOne = new Score( 0, canvas.width - 1599, canvas.height - 850, '#5ffbf1')
+
+
 
 //event listeners
 
@@ -201,7 +212,7 @@ function playerOneName(){
     , canvas.height/2 - 450 )
 }
 function updateScoreTwo(value){
-    let sum =value
+    let sum = value
     if(scoreTwo && pong.xpos < 0){
         sum++
         return scoreTwo.num = sum
@@ -292,7 +303,13 @@ function updateBoard(){
 
 context.fillStyle = '#d16ba5'
     context.font = '100px Courier New'
-    context.fillText('Press Space To Play !', canvas.width/2 - 600 , canvas.height/2 )
+    context.fillText('Press Space To Play !', canvas.width/2 - 600 , canvas.height/2 - 300 )
+    context.font = '60px Courier New'
+    context.fillText('Player One to move the right paddle', canvas.width/2 - 700, canvas.height/2 - 100 )
+    context.fillText('press W to go up and S to go down', canvas.width/2 - 700, canvas.height/2)
+    context.fillText('Player Two to move the left paddle press', canvas.width/2 - 700, canvas.height/2 + 200)
+    context.fillText('Up Arrow to go up and Down Arrow to', canvas.width/2 - 700, canvas.height/2 + 300)
+    context.fillText('go down', canvas.width/2 - 700, canvas.height/2 + 400)
 
 window.addEventListener('keydown', function(e){
     if (e.keyCode === 32 ){
