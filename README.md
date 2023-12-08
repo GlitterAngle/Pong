@@ -1,13 +1,26 @@
 <<<<<<< HEAD
 # Pong
 =======
-# Project Proposal : Pong
-
-## Project Description
-This is a recreation of the classic game from the 70s. Two players can play, whoever reaches a score of 5 first wins. Users will have the option to play again. In the future, I would like to add a feature where there is an automated player and a shrinking paddle as the game progresses, and a pause button for the musice and sound effects (for better accessibility)
 
 ## Technologies Used
 I used HTML CSS and JavaScript to complete my game!
+
+## Getting Started
+
+https://main--resplendent-mooncake-392bf6.netlify.app/
+
+To move Left Paddle (Player One)
+w to move up 
+s to move down
+
+To move Right Paddle (Player Two)
+Up arrow to move up 
+Down arrow to move down
+
+Press space-bar to start the game 
+
+can toggle background music on or ovee with the control music button, the text changes to according to the status of the music
+
 
 ## Wire Frames 
 Initial Landing
@@ -26,6 +39,12 @@ Win/Lose
 
 ![meme](https://github.com/GlitterAngle/Pong/assets/138747127/1358c69e-56aa-4d1c-9e80-01de0c393221)
 
+### Schedule a peek into my life 
+
+![Screenshot 2023-12-08 at 12 15 46 PM](https://github.com/GlitterAngle/Pong/assets/138747127/14d68bda-5b2d-4244-8538-ce8ae1f7476c)
+
+
+![Screenshot 2023-12-08 at 12 15 53 PM](https://github.com/GlitterAngle/Pong/assets/138747127/4e7274c7-8d1b-467f-b12d-71cfe2decf5c)
 
 
 #### MVP Goals 
@@ -57,11 +76,6 @@ Win/Lose
  
 
 >>>>>>> 87dde38560507c003575dae0189c21caae1c17b2
-
-
-
-
-
 
 
 
